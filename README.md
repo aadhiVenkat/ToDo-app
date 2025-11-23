@@ -29,8 +29,8 @@ A modern, professional todo application built with React and Tailwind CSS. Featu
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/todo-app.git
-cd todo-app
+git clone https://github.com/aadhiVenkat/ToDo-app.git
+cd ToDo-app
 ```
 
 2. Install dependencies:
@@ -129,4 +129,3 @@ Built with ❤️ using React and Tailwind CSS
 ---
 
 **Note**: This is a portfolio project showcasing modern React development practices and responsive design.
-
