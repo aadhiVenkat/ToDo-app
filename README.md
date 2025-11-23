@@ -2,9 +2,13 @@
 
 A modern, professional todo application built with React and Tailwind CSS. Features a beautiful dark/light theme, priority levels, statistics dashboard, and full CRUD functionality.
 
+## 🔗 [**Live Demo**](https://aadhivenkat.github.io/ToDo-app/) ✨
+
 ![TaskMaster Todo App](https://img.shields.io/badge/React-18.2.0-61DAFB?logo=react)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4.0-38B2AC?logo=tailwind-css)
 ![Vite](https://img.shields.io/badge/Vite-5.0.8-646CFF?logo=vite)
+[![Live Demo](https://img.shields.io/badge/demo-live-success?logo=github)](https://aadhivenkat.github.io/ToDo-app/)
+[![GitHub Pages](https://img.shields.io/badge/deployed%20on-GitHub%20Pages-blue?logo=github)](https://aadhivenkat.github.io/ToDo-app/)
 
 ## ✨ Features
 
@@ -124,8 +128,22 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 👨‍💻 Author
 
+**Aadhi Venkat**
+- GitHub: [@aadhiVenkat](https://github.com/aadhiVenkat)
+- Live Demo: [TaskMaster App](https://aadhivenkat.github.io/ToDo-app/)
+
 Built with ❤️ using React and Tailwind CSS
 
 ---
+
+## 🌟 Portfolio Highlights
+
+This project demonstrates:
+- ✅ **Modern React Patterns** - Hooks, Context API, component composition
+- ✅ **Responsive Design** - Mobile-first approach with Tailwind CSS
+- ✅ **State Management** - Efficient local state with localStorage persistence
+- ✅ **User Experience** - Smooth animations, keyboard shortcuts, theme switching
+- ✅ **Clean Code** - Well-structured components, reusable logic
+- ✅ **Production Ready** - Deployed on GitHub Pages with CI/CD
 
 **Note**: This is a portfolio project showcasing modern React development practices and responsive design.
