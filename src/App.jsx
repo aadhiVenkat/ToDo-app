@@ -28,7 +28,7 @@ function App() {
 
   const addTodo = (text) => {
     const newTodo = {
-      id: Date.now(),
+      id: crypto.randomUUID(),
       text,
       completed: false,
       createdAt: new Date().toISOString()
