@@ -41,6 +41,11 @@ jobs:
           GITHUB_PAGES: 'true'
           GITHUB_ACTIONS: 'true'
 
+      - name: Prepare for deployment
+        run: |
+          touch dist/.nojekyll
+          rm -f dist/CNAME
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
