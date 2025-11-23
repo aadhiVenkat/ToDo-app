@@ -9,15 +9,29 @@ import ThemeToggle from './components/ThemeToggle'
 function App() {
   const { theme } = useTheme()
   const [todos, setTodos] = useState(() => {
-    const savedTodos = localStorage.getItem('todos')
-    return savedTodos ? JSON.parse(savedTodos) : []
+    try {
+      if (typeof window !== 'undefined' && window.localStorage) {
+        const savedTodos = localStorage.getItem('todos')
+        return savedTodos ? JSON.parse(savedTodos) : []
+      }
+      return []
+    } catch (error) {
+      console.error('Error loading todos:', error)
+      return []
+    }
   })
   const [filter, setFilter] = useState('all')
   const [editingId, setEditingId] = useState(null)
 
   // Save to localStorage whenever todos change
   useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos))
+    try {
+      if (typeof window !== 'undefined' && window.localStorage) {
+        localStorage.setItem('todos', JSON.stringify(todos))
+      }
+    } catch (error) {
+      console.error('Error saving todos:', error)
+    }
   }, [todos])
 
   const addTodo = (text, priority = 'medium') => {
