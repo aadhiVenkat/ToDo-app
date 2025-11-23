@@ -15,6 +15,8 @@ A modern, professional todo application built with React and Tailwind CSS. Featu
 - 🌓 **Dark/Light Theme** - Toggle between dark and light modes with smooth transitions
 - 📊 **Statistics Dashboard** - View total, active, and completed tasks at a glance
 - 🎯 **Priority Levels** - Set low, medium, or high priority for each task
+- 📅 **Due Dates** - Add optional due dates with visual indicators for overdue and upcoming tasks
+- 🔍 **Search Functionality** - Quickly find tasks by searching through task text
 - ✅ **Full CRUD Operations** - Create, read, update, and delete tasks
 - 🔍 **Filtering** - Filter tasks by All, Active, or Completed
 - 💾 **Local Storage** - All tasks are automatically saved to browser storage
@@ -74,10 +76,21 @@ The production build will be in the `dist` directory.
 ### Task Management
 - **Add Task**: Type in the input field and click "Add Task" or press Enter
 - **Set Priority**: Click the priority buttons (L/M/H) before adding a task
+- **Add Due Date**: Select an optional due date for tasks with deadline reminders
+- **Search Tasks**: Use the search bar to quickly find tasks by text
 - **Edit Task**: Double-click on any task to edit it
 - **Complete Task**: Click the checkbox to mark a task as complete
 - **Delete Task**: Hover over a task and click the delete icon
 - **Change Priority**: Click on the priority badge to change it
+
+### Due Date Features
+- **Visual Indicators**: 
+  - 🔴 Red "Overdue" for past due dates
+  - 🟠 Orange "Today" for tasks due today
+  - 🔵 Blue "Tomorrow" for tasks due tomorrow
+  - Days countdown for tasks due within a week
+  - Date display for tasks due later
+- **Smart Sorting**: Tasks are automatically sorted by due date (overdue first)
 
 ### Filtering
 - **All**: Shows all tasks

@@ -5,6 +5,7 @@ import TodoList from './components/TodoList'
 import TodoFilters from './components/TodoFilters'
 import StatsCard from './components/StatsCard'
 import ThemeToggle from './components/ThemeToggle'
+import SearchBar from './components/SearchBar'
 
 function App() {
   const { theme } = useTheme()
@@ -22,6 +23,7 @@ function App() {
   })
   const [filter, setFilter] = useState('all')
   const [editingId, setEditingId] = useState(null)
+  const [searchQuery, setSearchQuery] = useState('')
 
   // Save to localStorage whenever todos change
   useEffect(() => {
@@ -34,13 +36,14 @@ function App() {
     }
   }, [todos])
 
-  const addTodo = (text, priority = 'medium') => {
+  const addTodo = (text, priority = 'medium', dueDate = '') => {
     if (text.trim()) {
       const newTodo = {
         id: Date.now().toString(),
         text: text.trim(),
         completed: false,
         priority: priority,
+        dueDate: dueDate,
         createdAt: new Date().toISOString()
       }
       setTodos([...todos, newTodo])
@@ -76,11 +79,26 @@ function App() {
     setTodos(todos.filter(todo => !todo.completed))
   }
 
-  const filteredTodos = todos.filter(todo => {
-    if (filter === 'active') return !todo.completed
-    if (filter === 'completed') return todo.completed
-    return true
-  })
+  // Filter and search todos
+  const filteredTodos = todos
+    .filter(todo => {
+      // Apply status filter
+      if (filter === 'active') return !todo.completed
+      if (filter === 'completed') return todo.completed
+      return true
+    })
+    .filter(todo => {
+      // Apply search filter
+      if (!searchQuery.trim()) return true
+      return todo.text.toLowerCase().includes(searchQuery.toLowerCase())
+    })
+    .sort((a, b) => {
+      // Sort by due date (overdue first, then by date)
+      if (!a.dueDate && !b.dueDate) return 0
+      if (!a.dueDate) return 1
+      if (!b.dueDate) return -1
+      return new Date(a.dueDate) - new Date(b.dueDate)
+    })
 
   const activeTodosCount = todos.filter(todo => !todo.completed).length
   const completedTodosCount = todos.filter(todo => todo.completed).length
@@ -167,17 +185,42 @@ function App() {
             <TodoForm onAdd={addTodo} />
           </div>
 
+          {/* Search Bar */}
+          {todos.length > 0 && (
+            <div className={`px-4 sm:px-6 pt-4 sm:pt-6 pb-2 border-b transition-colors ${
+              theme === 'dark' ? 'border-white/10' : 'border-gray-200'
+            }`}>
+              <SearchBar searchQuery={searchQuery} onSearchChange={setSearchQuery} />
+            </div>
+          )}
+
           {/* Todo List */}
           <div className="p-4 sm:p-6 min-h-[200px] sm:min-h-[300px]">
-            <TodoList
-              todos={filteredTodos}
-              editingId={editingId}
-              onToggle={toggleTodo}
-              onDelete={deleteTodo}
-              onEdit={editTodo}
-              onEditStart={setEditingId}
-              onUpdatePriority={updatePriority}
-            />
+            {searchQuery && filteredTodos.length === 0 && todos.length > 0 ? (
+              <div className="text-center py-8 sm:py-12">
+                <p className={`text-base sm:text-lg font-medium mb-2 ${
+                  theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                }`}>
+                  No tasks found for "{searchQuery}"
+                </p>
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="text-sm text-purple-500 hover:text-purple-600 underline"
+                >
+                  Clear search
+                </button>
+              </div>
+            ) : (
+              <TodoList
+                todos={filteredTodos}
+                editingId={editingId}
+                onToggle={toggleTodo}
+                onDelete={deleteTodo}
+                onEdit={editTodo}
+                onEditStart={setEditingId}
+                onUpdatePriority={updatePriority}
+              />
+            )}
           </div>
 
           {/* Filters */}

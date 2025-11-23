@@ -71,6 +71,31 @@ function TodoItem({ todo, isEditing, onToggle, onDelete, onEdit, onEditStart, on
     high: 'High'
   }
 
+  const formatDueDate = (dateString) => {
+    if (!dateString) return null
+    const date = new Date(dateString)
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    const dueDate = new Date(date)
+    dueDate.setHours(0, 0, 0, 0)
+    
+    const diffTime = dueDate - today
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+    
+    if (diffDays < 0) return { text: 'Overdue', color: 'text-red-500', bgColor: isDark ? 'bg-red-500/20' : 'bg-red-50' }
+    if (diffDays === 0) return { text: 'Today', color: 'text-orange-500', bgColor: isDark ? 'bg-orange-500/20' : 'bg-orange-50' }
+    if (diffDays === 1) return { text: 'Tomorrow', color: 'text-blue-500', bgColor: isDark ? 'bg-blue-500/20' : 'bg-blue-50' }
+    if (diffDays <= 7) return { text: `${diffDays} days`, color: isDark ? 'text-blue-300' : 'text-blue-600', bgColor: isDark ? 'bg-blue-500/20' : 'bg-blue-50' }
+    
+    return { 
+      text: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }), 
+      color: isDark ? 'text-gray-400' : 'text-gray-600',
+      bgColor: isDark ? 'bg-white/5' : 'bg-gray-50'
+    }
+  }
+
+  const dueDateInfo = formatDueDate(todo.dueDate)
+
   return (
     <div
       className={`group flex flex-wrap sm:flex-nowrap items-start sm:items-center gap-3 sm:gap-4 p-4 sm:p-5 backdrop-blur-sm border-2 rounded-xl sm:rounded-2xl transition-all duration-300 ${
@@ -125,20 +150,31 @@ function TodoItem({ todo, isEditing, onToggle, onDelete, onEdit, onEditStart, on
           }`}
         />
       ) : (
-        <span
-          onDoubleClick={handleDoubleClick}
-          className={`flex-1 min-w-0 cursor-pointer select-none transition-all font-medium text-sm sm:text-base break-words ${
-            todo.completed
-              ? isDark
-                ? 'line-through text-gray-400'
-                : 'line-through text-gray-400'
-              : isDark
-              ? 'text-white hover:text-purple-300'
-              : 'text-gray-800 hover:text-purple-600'
-          }`}
-        >
-          {todo.text}
-        </span>
+        <div className="flex-1 min-w-0">
+          <span
+            onDoubleClick={handleDoubleClick}
+            className={`cursor-pointer select-none transition-all font-medium text-sm sm:text-base break-words block ${
+              todo.completed
+                ? isDark
+                  ? 'line-through text-gray-400'
+                  : 'line-through text-gray-400'
+                : isDark
+                ? 'text-white hover:text-purple-300'
+                : 'text-gray-800 hover:text-purple-600'
+            }`}
+          >
+            {todo.text}
+          </span>
+          {/* Due Date Display */}
+          {dueDateInfo && !todo.completed && (
+            <div className={`flex items-center gap-1.5 mt-1.5 ${dueDateInfo.color}`}>
+              <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span className="text-xs font-medium">{dueDateInfo.text}</span>
+            </div>
+          )}
+        </div>
       )}
 
       {/* Priority Badge */}

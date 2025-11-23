@@ -5,13 +5,15 @@ function TodoForm({ onAdd }) {
   const { theme } = useTheme()
   const [input, setInput] = useState('')
   const [priority, setPriority] = useState('medium')
+  const [dueDate, setDueDate] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
     if (input.trim()) {
-      onAdd(input, priority)
+      onAdd(input, priority, dueDate)
       setInput('')
       setPriority('medium')
+      setDueDate('')
     }
   }
 
@@ -66,6 +68,40 @@ function TodoForm({ onAdd }) {
           <span className="sm:hidden">Add</span>
         </button>
       </div>
+      
+      {/* Due Date Input */}
+      <div className="flex items-center gap-2 sm:gap-3">
+        <label className={`text-xs sm:text-sm font-medium transition-colors flex items-center gap-2 ${
+          isDark ? 'text-gray-300' : 'text-gray-600'
+        }`}>
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          Due Date:
+        </label>
+        <input
+          type="date"
+          value={dueDate}
+          onChange={(e) => setDueDate(e.target.value)}
+          className={`px-3 py-1.5 sm:py-2 backdrop-blur-sm border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all text-xs sm:text-sm ${
+            isDark
+              ? 'bg-white/20 border-white/30 text-white'
+              : 'bg-gray-50 border-gray-300 text-gray-800 focus:bg-white'
+          }`}
+        />
+        {dueDate && (
+          <button
+            type="button"
+            onClick={() => setDueDate('')}
+            className={`text-xs sm:text-sm px-2 py-1 rounded-lg transition-colors ${
+              isDark ? 'text-gray-400 hover:text-gray-200 hover:bg-white/10' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
+            }`}
+          >
+            Clear
+          </button>
+        )}
+      </div>
+      
       {priority !== 'medium' && (
         <div className={`flex items-center gap-2 text-sm transition-colors ${
           isDark ? 'text-gray-300' : 'text-gray-600'
