@@ -7,6 +7,7 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [darkMode, setDarkMode] = useState(false);
   const [editingTodo, setEditingTodo] = useState(null);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   // Load todos from localStorage on mount
   useEffect(() => {
@@ -20,12 +21,16 @@ function App() {
     if (savedDarkMode) {
       setDarkMode(JSON.parse(savedDarkMode));
     }
+    
+    setIsInitialized(true);
   }, []);
 
-  // Save todos to localStorage whenever they change
+  // Save todos to localStorage whenever they change (after initialization)
   useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos));
-  }, [todos]);
+    if (isInitialized) {
+      localStorage.setItem('todos', JSON.stringify(todos));
+    }
+  }, [todos, isInitialized]);
 
   // Save dark mode preference
   useEffect(() => {
@@ -39,7 +44,7 @@ function App() {
 
   const addTodo = (text) => {
     const newTodo = {
-      id: Date.now(),
+      id: crypto.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       text: text,
       completed: false,
       createdAt: new Date().toISOString(),
