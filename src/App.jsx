@@ -9,16 +9,79 @@ import SearchBar from './components/SearchBar'
 
 function App() {
   const { theme } = useTheme()
+  
+  // Sample tasks to demonstrate features
+  const getSampleTasks = () => {
+    const today = new Date()
+    const tomorrow = new Date(today)
+    tomorrow.setDate(tomorrow.getDate() + 1)
+    const nextWeek = new Date(today)
+    nextWeek.setDate(nextWeek.getDate() + 5)
+    const yesterday = new Date(today)
+    yesterday.setDate(yesterday.getDate() - 1)
+    
+    return [
+      {
+        id: '1',
+        text: 'Welcome to TaskMaster! Double-click any task to edit it',
+        completed: false,
+        priority: 'medium',
+        dueDate: '',
+        createdAt: new Date().toISOString()
+      },
+      {
+        id: '2',
+        text: 'Review project documentation and update README',
+        completed: false,
+        priority: 'high',
+        dueDate: today.toISOString().split('T')[0],
+        createdAt: new Date().toISOString()
+      },
+      {
+        id: '3',
+        text: 'Schedule team meeting for next sprint planning',
+        completed: false,
+        priority: 'medium',
+        dueDate: tomorrow.toISOString().split('T')[0],
+        createdAt: new Date().toISOString()
+      },
+      {
+        id: '4',
+        text: 'Complete code review for pull request #123',
+        completed: true,
+        priority: 'high',
+        dueDate: yesterday.toISOString().split('T')[0],
+        createdAt: new Date().toISOString()
+      },
+      {
+        id: '5',
+        text: 'Prepare presentation for client demo',
+        completed: false,
+        priority: 'high',
+        dueDate: nextWeek.toISOString().split('T')[0],
+        createdAt: new Date().toISOString()
+      },
+      {
+        id: '6',
+        text: 'Update portfolio website with new projects',
+        completed: false,
+        priority: 'low',
+        dueDate: '',
+        createdAt: new Date().toISOString()
+      }
+    ]
+  }
+  
   const [todos, setTodos] = useState(() => {
     try {
       if (typeof window !== 'undefined' && window.localStorage) {
         const savedTodos = localStorage.getItem('todos')
-        return savedTodos ? JSON.parse(savedTodos) : []
+        return savedTodos ? JSON.parse(savedTodos) : getSampleTasks()
       }
-      return []
+      return getSampleTasks()
     } catch (error) {
       console.error('Error loading todos:', error)
-      return []
+      return getSampleTasks()
     }
   })
   const [filter, setFilter] = useState('all')
