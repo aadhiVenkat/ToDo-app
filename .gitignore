@@ -33,3 +33,11 @@ dist-ssr
 build
 *.tsbuildinfo
 
+# Test files
+playwright-report/
+test-results/
+coverage/
+
+# Automation outputs
+*.pdf
+automation/

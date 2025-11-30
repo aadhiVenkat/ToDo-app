@@ -5,13 +5,26 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:e2e": "playwright test",
+    "automate:add": "node automation/add-todos.js",
+    "automate:extract": "node automation/extract-todos.js",
+    "automate:complete": "node automation/complete-todos.js",
+    "automate:delete": "node automation/delete-todo.js",
+    "automate:clear": "node automation/clear-completed.js",
+    "automate:filter": "node automation/filter-todos.js",
+    "automate:search": "node automation/search-todos.js",
+    "automate:theme": "node automation/toggle-theme.js",
+    "automate:screenshot": "node automation/screenshot.js",
+    "automate:pdf": "node automation/generate-pdf.js",
+    "automate:edit": "node automation/edit-todo.js"
   },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.57.0",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react": "^4.2.1",
@@ -21,4 +34,3 @@
     "vite": "^5.0.8"
   }
 }
-
