@@ -7,7 +7,7 @@ function TodoList({ todos, editingId, onToggle, onDelete, onEdit, onEditStart, o
 
   if (todos.length === 0) {
     return (
-      <div className="text-center py-8 sm:py-16 animate-fade-in px-4">
+      <div data-testid="todo-list-empty" className="text-center py-8 sm:py-16 animate-fade-in px-4">
         <div className={`inline-block p-4 sm:p-6 bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-2xl sm:rounded-3xl mb-4 sm:mb-6 border transition-colors ${
           isDark ? 'border-white/20' : 'border-blue-200/50'
         }`}>
@@ -40,7 +40,7 @@ function TodoList({ todos, editingId, onToggle, onDelete, onEdit, onEditStart, o
   }
 
   return (
-    <div className="space-y-3">
+    <div data-testid="todo-list" className="space-y-3">
       {todos.map((todo, index) => (
         <div
           key={todo.id}

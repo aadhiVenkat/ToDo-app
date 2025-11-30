@@ -1,11 +1,13 @@
 import { useTheme } from '../contexts/ThemeContext'
 
-function StatsCard({ label, value, icon, gradient }) {
+function StatsCard({ label, value, icon, gradient, testId }) {
   const { theme } = useTheme()
   const isDark = theme === 'dark'
 
   return (
-    <div className={`backdrop-blur-xl rounded-xl sm:rounded-2xl p-4 sm:p-5 border transition-all duration-300 hover:scale-105 hover:shadow-xl ${
+    <div 
+      data-testid={testId}
+      className={`backdrop-blur-xl rounded-xl sm:rounded-2xl p-4 sm:p-5 border transition-all duration-300 hover:scale-105 hover:shadow-xl ${
       isDark
         ? 'bg-white/10 border-white/20 hover:bg-white/15'
         : 'bg-white/60 border-gray-200/50 hover:bg-white/80 shadow-md'

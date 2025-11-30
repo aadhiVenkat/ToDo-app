@@ -13,7 +13,9 @@ function TodoFilters({ filter, onFilterChange, activeCount, completedCount, onCl
   return (
     <div className="flex flex-col gap-3 sm:gap-4">
       {/* Todo Count */}
-      <div className={`text-xs sm:text-sm transition-colors text-center sm:text-left ${
+      <div 
+        data-testid="tasks-remaining"
+        className={`text-xs sm:text-sm transition-colors text-center sm:text-left ${
         isDark ? 'text-gray-300' : 'text-gray-600'
       }`}>
         <span className={`font-bold text-base sm:text-lg transition-colors ${
@@ -37,6 +39,7 @@ function TodoFilters({ filter, onFilterChange, activeCount, completedCount, onCl
             <button
               key={id}
               onClick={() => onFilterChange(id)}
+              data-testid={`filter-${id}`}
               className={`flex-1 sm:flex-initial px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center justify-center gap-1.5 sm:gap-2 ${
                 filter === id
                   ? 'bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white shadow-lg scale-105'
@@ -55,6 +58,7 @@ function TodoFilters({ filter, onFilterChange, activeCount, completedCount, onCl
         {completedCount > 0 && (
           <button
             onClick={onClearCompleted}
+            data-testid="clear-completed"
             className={`text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2 rounded-xl border transition-all focus:outline-none focus:ring-2 focus:ring-red-500 flex items-center justify-center gap-2 w-full sm:w-auto ${
               isDark
                 ? 'text-red-400 hover:text-red-300 hover:bg-red-500/20 border-red-500/30'

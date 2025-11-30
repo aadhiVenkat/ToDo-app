@@ -30,6 +30,7 @@ function SearchBar({ searchQuery, onSearchChange }) {
       {searchQuery && (
         <button
           onClick={() => onSearchChange('')}
+          data-testid="search-clear"
           className={`absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-lg transition-colors ${
             isDark ? 'text-gray-400 hover:text-gray-200 hover:bg-white/10' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-200'
           }`}

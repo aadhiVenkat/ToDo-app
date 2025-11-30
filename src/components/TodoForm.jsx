@@ -40,6 +40,7 @@ function TodoForm({ onAdd }) {
                 key={p}
                 type="button"
                 onClick={() => setPriority(p)}
+                data-testid={`priority-${p}`}
                 className={`px-2 sm:px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
                   priority === p
                     ? p === 'low'
@@ -83,6 +84,7 @@ function TodoForm({ onAdd }) {
           type="date"
           value={dueDate}
           onChange={(e) => setDueDate(e.target.value)}
+          data-testid="due-date-input"
           className={`px-3 py-1.5 sm:py-2 backdrop-blur-sm border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all text-xs sm:text-sm ${
             isDark
               ? 'bg-white/20 border-white/30 text-white'

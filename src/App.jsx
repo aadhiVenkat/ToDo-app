@@ -207,18 +207,21 @@ function App() {
               value={totalTodos}
               icon="📋"
               gradient="from-blue-500 to-cyan-500"
+              testId="stats-total"
             />
             <StatsCard
               label="Active"
               value={activeTodosCount}
               icon="⚡"
               gradient="from-purple-500 to-pink-500"
+              testId="stats-active"
             />
             <StatsCard
               label="Completed"
               value={completedTodosCount}
               icon="✅"
               gradient="from-green-500 to-emerald-500"
+              testId="stats-completed"
             />
           </div>
         )}

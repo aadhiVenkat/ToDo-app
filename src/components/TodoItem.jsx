@@ -98,6 +98,7 @@ function TodoItem({ todo, isEditing, onToggle, onDelete, onEdit, onEditStart, on
 
   return (
     <div
+      data-testid="todo-item"
       className={`group flex flex-wrap sm:flex-nowrap items-start sm:items-center gap-3 sm:gap-4 p-4 sm:p-5 backdrop-blur-sm border-2 rounded-xl sm:rounded-2xl transition-all duration-300 ${
         todo.completed
           ? isDark
@@ -116,6 +117,7 @@ function TodoItem({ todo, isEditing, onToggle, onDelete, onEdit, onEditStart, on
           type="checkbox"
           checked={todo.completed}
           onChange={() => onToggle(todo.id)}
+          data-testid="todo-checkbox"
           className={`w-5 h-5 sm:w-6 sm:h-6 appearance-none border-2 rounded-lg checked:bg-gradient-to-br checked:from-blue-500 checked:to-purple-500 checked:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-500 cursor-pointer transition-all duration-200 relative ${
             isDark
               ? 'border-white/30 bg-white/10'
@@ -143,6 +145,7 @@ function TodoItem({ todo, isEditing, onToggle, onDelete, onEdit, onEditStart, on
           onChange={(e) => setEditText(e.target.value)}
           onBlur={handleBlur}
           onKeyDown={handleKeyDown}
+          data-testid="todo-edit-input"
           className={`flex-1 min-w-0 px-3 sm:px-4 py-2 backdrop-blur-sm border-2 border-purple-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors text-sm sm:text-base ${
             isDark
               ? 'bg-white/20 text-white placeholder-gray-400'
@@ -153,6 +156,7 @@ function TodoItem({ todo, isEditing, onToggle, onDelete, onEdit, onEditStart, on
         <div className="flex-1 min-w-0">
           <span
             onDoubleClick={handleDoubleClick}
+            data-testid="todo-text"
             className={`cursor-pointer select-none transition-all font-medium text-sm sm:text-base break-words block ${
               todo.completed
                 ? isDark
@@ -167,7 +171,7 @@ function TodoItem({ todo, isEditing, onToggle, onDelete, onEdit, onEditStart, on
           </span>
           {/* Due Date Display */}
           {dueDateInfo && !todo.completed && (
-            <div className={`flex items-center gap-1.5 mt-1.5 ${dueDateInfo.color}`}>
+            <div data-testid="todo-due-date" className={`flex items-center gap-1.5 mt-1.5 ${dueDateInfo.color}`}>
               <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
@@ -235,6 +239,7 @@ function TodoItem({ todo, isEditing, onToggle, onDelete, onEdit, onEditStart, on
       {/* Delete Button */}
       <button
         onClick={() => onDelete(todo.id)}
+        data-testid="todo-delete"
         className={`opacity-100 sm:opacity-0 sm:group-hover:opacity-100 p-2 sm:p-2.5 rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 transform hover:scale-110 active:scale-95 flex-shrink-0 ${
           isDark
             ? 'text-red-400 hover:text-red-300 hover:bg-red-500/20'
